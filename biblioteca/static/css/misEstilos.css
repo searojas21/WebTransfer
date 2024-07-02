@@ -1,0 +1,76 @@
+body{
+    background-image: url("../img/Fondo\ naranjo.avif");
+    background-size: cover;
+   
+}
+
+.menu{
+    background-color:rgb(219, 106, 13);
+}
+
+.navbar-nav .nav-link {
+    color: rgb(255, 255, 255); 
+    font-weight: bolder; 
+}
+
+.video{
+    display: flex;
+    justify-content: center;
+
+}
+
+.col-md-6 h2{
+    display: flex;
+    justify-content: center;
+    color: rgb(0, 0, 0);
+
+}
+.col-md-6 p{
+    display: flex;
+    justify-content: center;
+    color: rgb(0, 0, 0);
+
+}
+
+.footer {
+    max-width: 100%; 
+    padding: 20px 0; 
+  }
+
+.contenedorh1 h1{
+    display: flex;
+    justify-content: center;
+    color: rgb(0, 0, 0);
+}
+
+  
+  .producto-info {
+    position: absolute;
+    background-color: rgba(219, 89, 14, 0.9);
+    padding: 30;
+    width: 100%;
+    height: max-content;
+    display: grid;
+  }
+
+
+  .RedesSociales {
+    text-decoration: none;
+  }
+
+  .form-group{
+    margin-bottom: 30px;
+}
+
+.etiqueta{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color:rgb(0, 0, 0);
+}
+.boton{
+    margin-top: 30px;
+    margin-right: 40px;
+    width: 150px;
+    height: 50px;
+    font-weight: bold;
+}

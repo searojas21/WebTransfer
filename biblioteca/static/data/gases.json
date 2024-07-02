@@ -1,0 +1,90 @@
+{
+    "galones":[ 
+        {
+            "id":"AB5",
+            "kg":"5",
+            "marca":"Abastible",
+            "precio":"$13.000"
+        },
+        {
+            "id":"AB11",
+            "kg":"11",
+            "marca":"Abastible",
+            "precio":"$20.500"
+        },
+        {
+            "id":"AB29",
+            "kg":"15",
+            "marca":"Abastible",
+            "precio":"$29.500"
+        },
+        {
+            "id":"AB45",
+            "kg":"45",
+            "marca":"Abastible",
+            "precio":"$85.000"
+        },
+
+        {
+            "id":"LI5",
+            "kg":"5",
+            "marca":"Lipigas",
+            "precio":"$15.000"
+        },
+
+        {
+            "id":"LI11",
+            "kg":"11",
+            "marca":"Lipigas",
+            "precio":"$22.500"
+        },
+
+        {
+            "id":"LI15",
+            "kg":"15",
+            "marca":"Lipigas",
+            "precio":"$30.500"
+        },
+
+        {
+            "id":"LI45",
+            "kg":"45",
+            "marca":"Lipigas",
+            "precio":"$86.000"
+        },
+
+        {
+            "id":"GA5",
+            "kg":"5",
+            "marca":"Gasco",
+            "precio":"$16.000"
+        },
+
+        {
+            "id":"GA11",
+            "kg":"11",
+            "marca":"Gasco",
+            "precio":"$23.500"
+        },
+
+        {
+            "id":"GA15",
+            "kg":"15",
+            "marca":"Gasco",
+            "precio":"$31.500"
+        },
+
+        {
+            "id":"GA45",
+            "kg":"45",
+            "marca":"Gasco",
+            "precio":"$88.000"
+        }
+
+    ]
+
+
+
+
+
+}

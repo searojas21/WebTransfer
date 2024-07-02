@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="icon" type="image/x-icon" href="{% static 'img/AbastibleIcono1.png' %}">
+    <link rel="stylesheet" href="{% static 'css/misEstilos.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+ <!--BARRA DE NAVEGACION-->
+ <nav class="navbar navbar-expand-sm navbar-light bg-light, menu">
+          
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+      data-bs-target="#opciones" style="margin-left: 15px;">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+ 
+  
+    <a href="{% url 'inicio' %}" class="navbar-brand">
+      <img src="{% static 'img/icono transfer.webp' %}" width="30px" height="30px" style="margin-left: 15px;">
+    </a>
+    <!-- Links -->
+    <div class="collapse navbar-collapse" id="opciones">
+      <div>
+        {% if user.is_authenticated %}
+                <a href="#" style="color:blueviolet; font-size: 12px; justify-content: right;">Bienvenid@ {{user.username}}</a>
+                <a href="{% url 'cerrar' %}" id="userBookStop">
+                    <img src="{% static 'img/user-vector-icon.png' %}" alt="NO DATA FOUND" width="20px">Cerrar sesión
+                </a>
+        {% else %}
+            <a href="{% url 'login' %}" id="userBookSto" style="color:blueviolet; text-align:  right;">
+                <img src="{% static 'img/user-vector-icon.png' %}" alt="NO DATA FOUND" width="20px">Iniciar sesión
+            </a>
+        {% endif %}
+    </div>
+    <div class="collapse navbar-collapse" id="opciones">
+      <ul class="navbar-nav" style="margin-left: 15px;">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'inicio' %}">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'tienda' %}">Reserva</a>
+        </li>
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'productos' %}">Vehiculos</a>
+          </li>
+      {% endif %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'quienesSomos' %}">Quienes Somos</a>
+      </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'trabajaConNosotros' %}">Trabaja Con Nosotros</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'disponibilidad' %}">Feriados</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'perfil' %}">Perfil: {{user.username}}</a>
+      </li>
+      {% endif %}
+      </ul>
+    </div>
+   
+</nav>
+<br>
+<br>
+<body>
+    <main class="container">
+        <div class="row">
+            <div class="col-12 col-md-6 offset-md-3 ">
+                <div class="card">
+                    <div class="card-body">
+                        <h2>Iniciar Sesión</h2>
+                        <hr>
+                        <form action="#" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="">Nombre de Usuario: </label><br>
+                                {{form.username}}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Contraseña: </label><br>
+                                {{form.password}}
+                            </div>
+                            <div>
+                                {% if form.errors %}
+                                <p style="color: red; font-size: 12px;">Usuario y/o contraseña incorrecto. Inténtalo de nuevo.</p>
+                                {% endif %}
+                            </div> 
+
+                            <a href="{% url 'registrar' %}">Registrarse</a> | 
+                            <a href="{% url 'inicio' %}">Inicio</a> | 
+                            <input type="submit" value="Iniciar sesión" class="btn btn-outline-primary" style="float: right;">
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </main>
+
+
+</body>
+
+
+</body>
+</html>

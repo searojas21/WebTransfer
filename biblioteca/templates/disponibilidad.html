@@ -1,0 +1,263 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feriados</title>
+    <link rel="stylesheet" href="{% static 'css/misEstilos.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'img/icono transfer.webp' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid rgb(0, 0, 0);
+            padding: 8px;
+            text-align: left;
+            background-color:rgba(40, 170, 103, 0.774);
+            color:black;
+            font-weight: bold;
+            
+        }
+
+        th {
+            background-color: rgb(246, 229, 229);
+        }
+
+        .Disponibilidad {
+            color: red;
+            font-weight: bold;
+        }
+
+        .HayDisponibilidad {
+            color: rgb(28, 93, 136);
+            font-weight: bold;
+        }
+
+        .botones{
+          text-align: center;
+        }
+    </style>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TransViaje</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'img/icono transfer.webp' %}">
+    <link rel="stylesheet" href="css/misEstilos.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <!--BARRA DE NAVEGACION-->
+  <nav class="navbar navbar-expand-sm navbar-light bg-light, menu">
+          
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+        data-bs-target="#opciones" style="margin-left: 15px;">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+   
+    
+      <a href="{% url 'inicio' %}" class="navbar-brand">
+        <img src="{% static 'img/icono transfer.webp' %}" width="30px" height="30px" style="margin-left: 15px;">
+      </a>
+      <!-- Links -->
+      <div class="collapse navbar-collapse" id="opciones">
+        <div>
+          {% if user.is_authenticated %}
+                  <a href="#" style="color:blueviolet; font-size: 12px; justify-content: right;">Bienvenid@ {{user.username}}</a>
+                  <a href="{% url 'cerrar' %}" id="userBookStop">
+                      <img src="{% static 'img/user-vector-icon.png' %}" alt="NO DATA FOUND" width="20px">Cerrar sesión
+                  </a>
+          {% else %}
+              <a href="{% url 'login' %}" id="userBookSto" style="color:blueviolet; text-align:  right;">
+                  <img src="{% static 'img/user-vector-icon.png' %}" alt="NO DATA FOUND" width="20px">Iniciar sesión
+              </a>
+          {% endif %}
+      </div>
+      <div class="collapse navbar-collapse" id="opciones">
+        <ul class="navbar-nav" style="margin-left: 15px;">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'inicio' %}">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'tienda' %}">Reserva</a>
+          </li>
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'productos' %}">Vehiculos</a>
+            </li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'quienesSomos' %}">Quienes Somos</a>
+        </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'trabajaConNosotros' %}">Trabaja Con Nosotros</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'disponibilidad' %}">Feriados</a>
+          </li>
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'perfil' %}">Perfil: {{user.username}}</a>
+        </li>
+        {% endif %}
+        </ul>
+      </div>
+     
+</nav>
+
+    
+        <div class="botones">
+        <h1>Revise si hay cobro extra en días feriados:</h1>
+        <h3>Listado de días feriados del año</h3>
+    <button id="mostrar" class="btn btn-dark">Consulte listado</button>
+    <h3>Consulte si el próximo feriado hay cobro:</h3>
+    <button id="cercano" class="btn btn-dark">Feriado próximo</button><br>
+    <div id="contenido"></div>
+        </div>
+
+    <script>
+        document.getElementById("mostrar").addEventListener("click", mostrarDatosApi);
+        document.getElementById("cercano").addEventListener("click", mostrarCercano);
+
+        let contenido = document.querySelector("#contenido");
+
+        function mostrarDatosApi() {
+            fetch("https://api.boostr.cl/holidays.json")
+                .then(res => res.json())
+                .then(data => {
+                    contenido.innerHTML = '';
+
+                    
+                    const tabla = document.createElement('table');
+
+                    
+                    const filaEncabezado = document.createElement('tr');
+                    const encabezados = ['Fecha', 'Nombre del Feriado', 'Tarifa'];
+                    encabezados.forEach(encabezado => {
+                        const th = document.createElement('th');
+                        th.textContent = encabezado;
+                        filaEncabezado.appendChild(th);
+                    });
+                    tabla.appendChild(filaEncabezado);
+
+                    
+                    data.data.forEach(holiday => {
+                        const fila = document.createElement('tr');
+                        const fecha = document.createElement('td');
+                        fecha.textContent = holiday.date;
+                        fila.appendChild(fecha);
+
+                        const nombre = document.createElement('td');
+                        nombre.textContent = holiday.title;
+                        fila.appendChild(nombre);
+
+                        const Disponibilidad = document.createElement('td');
+                        Disponibilidad.textContent = holiday.inalienable ? 'COBRO ADCIIONAL' : 'COBRO NORMAL';
+                        if (holiday.inalienable) {
+                            Disponibilidad.classList.add('Disponibilidad');
+                        } else {
+                            Disponibilidad.classList.add('HayDisponibilidad');
+                        }
+                        fila.appendChild(Disponibilidad);
+
+                        tabla.appendChild(fila);
+                    });
+
+                    contenido.appendChild(tabla);
+                })
+                .catch(error => {
+                    contenido.innerHTML = '<p style="color: red; font-weight: bold;" >Ha ocurrido un error al obtener los datos del listado.</p>';
+                    console.error('Error al obtener los datos:', error);
+                });
+        }
+
+        function mostrarCercano() {
+            fetch("https://api.boostr.cl/holidays.json")
+                .then(res => res.json())
+                .then(data => {
+                    
+                    const fechaActual = new Date();
+
+                    
+                    const festivosFuturos = data.data.filter(holiday => new Date(holiday.date) >= fechaActual);
+
+                    if (festivosFuturos.length > 0) {
+                       
+                        const diaCercano = festivosFuturos.reduce((anterior, actual) => {
+                            const fechaAnterior = new Date(anterior.date);
+                            const fechaActual = new Date(actual.date);
+                            return (fechaActual - fechaActual < fechaAnterior - fechaActual) ? actual : anterior;
+                        });
+
+                       
+                        const tablaCercano = document.createElement('table');
+
+                       
+                        const filaEncabezado = document.createElement('tr');
+                        const encabezados = ['Fecha', 'Nombre del Feriado', 'Disponibilidad'];
+                        encabezados.forEach(encabezado => {
+                            const th = document.createElement('th');
+                            th.textContent = encabezado;
+                            filaEncabezado.appendChild(th);
+                        });
+                        tablaCercano.appendChild(filaEncabezado);
+
+                        
+                        const filaCercano = document.createElement('tr');
+                        const fechaCercano = document.createElement('td');
+                        fechaCercano.textContent = diaCercano.date;
+                        filaCercano.appendChild(fechaCercano);
+
+                        const nombreCercano = document.createElement('td');
+                        nombreCercano.textContent = diaCercano.title;
+                        filaCercano.appendChild(nombreCercano);
+
+                        const DisponibilidadCercano = document.createElement('td');
+                        DisponibilidadCercano.textContent = diaCercano.inalienable ? 'COBRO ADCIIONAL' : 'COBRO NORMAL';
+                        if (diaCercano.inalienable) {
+                            DisponibilidadCercano.classList.add('Disponibilidad');
+                        } else {
+                            DisponibilidadCercano.classList.add('HayDisponibilidad');
+                        }
+                        filaCercano.appendChild(DisponibilidadCercano);
+
+                        tablaCercano.appendChild(filaCercano);
+
+                        
+                        contenido.innerHTML = `<p style="color: black; font-weight: bold;">El día festivo más cercano es:</p>`;
+                        contenido.appendChild(tablaCercano);
+                    } else {
+                        contenido.innerHTML = 'No hay días festivos futuros.';
+                    }
+                })
+                .catch(error => {
+                    contenido.innerHTML = '<p style="color: red; font-weight: bold;">Ocurrió un error al obtener los días festivos más cercanos.</p>';
+                    console.error('Error al obtener los datos:', error);
+                });
+        }
+    </script>
+    <br>
+    <br>
+    <br>
+    <footer class="footer bg-dark text-light text-center py-3 fixed-bottom">
+        <div class="container">
+            <span> &copy; TransViaje - Todos los derechos reservados 2024</span>
+            <a href="https://www.facebook.com/jano.gas.1/?locale=es_LA" class="RedesSociales">
+              <img src="{% static 'img/feibukk.webp' %}" width="47px" height="47px" style="margin-left: 15px;">
+            </a>
+            <a href="https://www.instagram.com/jano_gas?igsh=MWUxNHcxMTV5c2h1ZQ%3D%3D" class="RedesSociales">
+              <img src="{% static 'img/instagraaaam.png' %}" width="31px" height="31px" style="margin-left: 15px;">
+            </a>
+            <a href="index.html" class="RedesSociales">
+              <img src="{% static 'img/icono transfer.webp' %}" width="30px" height="30px" style="margin-left: 15px;">
+            </a>
+        </div>
+      </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

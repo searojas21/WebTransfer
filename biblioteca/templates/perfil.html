@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil Usuario</title>
+    <link rel="stylesheet" href="{% static 'css/misEstilos.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'img/icono transfer.webp' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+   <!--BARRA DE NAVEGACION-->
+   <nav class="navbar navbar-expand-sm navbar-light bg-light, menu">
+          
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+        data-bs-target="#opciones" style="margin-left: 15px;">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+   
+    
+      <a href="{% url 'inicio' %}" class="navbar-brand">
+        <img src="{% static 'img/icono transfer.webp' %}" width="30px" height="30px" style="margin-left: 15px;">
+      </a>
+      <!-- Links -->
+      <div class="collapse navbar-collapse" id="opciones">
+        <div>
+          {% if user.is_authenticated %}
+                  <a href="#" style="color:blueviolet; font-size: 12px; justify-content: right;">Bienvenid@ {{user.username}}</a>
+                  <a href="{% url 'cerrar' %}" id="userBookStop">
+                      <img src="{% static 'img/user-vector-icon.png' %}" alt="NO DATA FOUND" width="20px">Cerrar sesión
+                  </a>
+          {% else %}
+              <a href="{% url 'login' %}" id="userBookSto" style="color:blueviolet; text-align:  right;">
+                  <img src="{% static 'img/user-vector-icon.png' %}" alt="NO DATA FOUND" width="20px">Iniciar sesión
+              </a>
+          {% endif %}
+      </div>
+      <div class="collapse navbar-collapse" id="opciones">
+        <ul class="navbar-nav" style="margin-left: 15px;">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'inicio' %}">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'tienda' %}">Reserva</a>
+          </li>
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'productos' %}">Vehiculos</a>
+            </li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'quienesSomos' %}">Quienes Somos</a>
+        </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'trabajaConNosotros' %}">Trabaja Con Nosotros</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'disponibilidad' %}">Feriados</a>
+          </li>
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'perfil' %}">Perfil: {{user.username}}</a>
+        </li>
+        {% endif %}
+        </ul>
+      </div>
+     
+</nav>
+    <div class="container mt-4">
+        <h1>Perfil de {{ user.username }}</h1>
+        <p><strong>Usuario:</strong> {{ user.username }}</p>
+        <p><strong>Nombre:</strong> {{ user.first_name }}</p>
+        <p><strong>Apellido:</strong> {{ user.last_name }}</p>
+        <p><strong>Correo:</strong> {{ user.email }}</p>
+
+        <h3>Viajes: 14</h1>
+        <a href="{% url 'inicio' %}" class="btn btn-secondary">Volver</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
+</main>
+<footer class="footer bg-dark text-light text-center py-3 fixed-bottom">
+  <div class="container">
+      <span> &copy; TransViaje - Todos los derechos reservados 2024</span>
+      <a href="https://www.facebook.com/jano.gas.1/?locale=es_LA" class="RedesSociales">
+        <img src="{% static 'img/feibukk.webp' %}" width="47px" height="47px" style="margin-left: 15px;">
+      </a>
+      <a href="https://www.instagram.com/jano_gas?igsh=MWUxNHcxMTV5c2h1ZQ%3D%3D" class="RedesSociales">
+        <img src="{% static 'img/instagraaaam.png' %}" width="31px" height="31px" style="margin-left: 15px;">
+      </a>
+      <a href="index.html" class="RedesSociales">
+        <img src="{% static 'img/icono transfer.webp' %}" width="30px" height="30px" style="margin-left: 15px;">
+      </a>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

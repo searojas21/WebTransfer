@@ -1,0 +1,142 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quienes Somos</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'img/icono transfer.webp' %}">
+    <link rel="stylesheet" href="{% static 'css/misEstilos.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<!--BARRA DE NAVEGACION-->
+<nav class="navbar navbar-expand-sm navbar-light bg-light, menu">
+          
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+      data-bs-target="#opciones" style="margin-left: 15px;">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+ 
+  
+    <a href="{% url 'inicio' %}" class="navbar-brand">
+      <img src="{% static 'img/icono transfer.webp' %}" width="30px" height="30px" style="margin-left: 15px;">
+    </a>
+    <!-- Links -->
+    <div class="collapse navbar-collapse" id="opciones">
+      <div>
+        {% if user.is_authenticated %}
+                <a href="#" style="color:blueviolet; font-size: 12px; justify-content: right;">Bienvenid@ {{user.username}}</a>
+                <a href="{% url 'cerrar' %}" id="userBookStop">
+                    <img src="{% static 'img/user-vector-icon.png' %}" alt="NO DATA FOUND" width="20px">Cerrar sesión
+                </a>
+        {% else %}
+            <a href="{% url 'login' %}" id="userBookSto" style="color:blueviolet; text-align:  right;">
+                <img src="{% static 'img/user-vector-icon.png' %}" alt="NO DATA FOUND" width="20px">Iniciar sesión
+            </a>
+        {% endif %}
+    </div>
+    <div class="collapse navbar-collapse" id="opciones">
+      <ul class="navbar-nav" style="margin-left: 15px;">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'inicio' %}">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'tienda' %}">Reserva</a>
+        </li>
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'productos' %}">Vehiculos</a>
+          </li>
+      {% endif %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'quienesSomos' %}">Quienes Somos</a>
+      </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'trabajaConNosotros' %}">Trabaja Con Nosotros</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'disponibilidad' %}">Feriados</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'perfil' %}">Perfil: {{user.username}}</a>
+      </li>
+      {% endif %}
+      </ul>
+    </div>
+   
+</nav>
+   
+</nav>
+<div class="container mt-4">
+  <div class="contenedorh1">
+  <h1>¿QUIENES SOMOS?</h1>
+</div>
+  <h2>Bienvenidos a TransViaje, donde la confiabilidad, la eficiencia y la innovación se unene para ofrecerte una experiencia excepcional en servicios de transporte.</h1>
+  <br>
+
+  <div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Misión</h2>
+            <p>Ponemos a las personas y a las pequeñas y medianas empresas en el centro de nuestro quehacer, entregándoles servicios de transporte y soporte a sus proyectos y emprendimientos. Estimulamos la creación de un movimiento social que convoque a todos los actores de nuestra sociedad para apoyar el fortalecimiento y expansión de las Pymes.</p>
+        </div>
+        <div class="col-md-6">
+            <h2>Visión</h2>
+            <p>Ser una compañía reconocida, valorada y querida por la contribución que hace a la prosperidad de las personas y la sociedad, a través del fortalecimiento del espíritu emprendedor y el apoyo a las pequeñas y medianas empresas para que se transformen en un motor de desarrollo social y económico.</p>
+        </div>
+    </div>
+  </div>
+<div class="container mt-6">
+  <h2>Objetivos de la Organización</h2>
+  <div class="row">
+      <div class="col-md-6">
+          <ul>
+              <br>
+              <li>Desarrollo de talento humano incluyendo a nuestros choferes, quienes reciben formación continua para garantizar un servicio de alta calidad y la seguridad de nuestros clientes.</li>
+              <br>
+              <li>Compromiso Social y Comunitario ,apoyando a las comunidades locales mediante la creación de empleo para choferes y la provisión de servicios de transporte accesibles.</li>
+              <br>
+              <li>Innovación y Desarrollo Tecnológico, integrando sistemas avanzados de reserva y seguimiento para mejorar la experiencia del usuario y la eficiencia del servicio.</li>
+              <br>
+              <li>Eficiencia y Sostenibilidad, optimizando rutas y recursos para minimizar el impacto ambiental de nuestros servicios de transporte.</li>
+              <br>
+              <li>Desarrollo de talento humano incluyendo a nuestros choferes, quienes reciben formación continua para garantizar un servicio de alta calidad y la seguridad de nuestros clientes.</li>
+              <br>
+              <li>Responsabilidad corporativa, asegurando que todas nuestras operaciones cumplan con los más altos estándares éticos y legales, y promoviendo un ambiente de trabajo seguro y respetuoso.</li>
+              <br>
+              <li>Adaptación al cambio y la innovación, permaneciendo flexibles y abiertos a nuevas ideas y tecnologías que puedan mejorar nuestros servicios de transferencia y satisfacer las necesidades cambiantes de nuestros clientes.</li>
+          </ul>
+      </div>
+      <div class="col-md-6">
+          <img src="{% static 'img/conductor feliz.webp' %}" alt="albañiles" class="img-fluid">
+          
+        </div>
+      </div>
+    </div>
+    
+  <br>
+<br>
+<br>
+<br>
+  
+</div>
+
+<footer class="footer bg-dark text-light text-center py-3 fixed-bottom">
+  <div class="container">
+      <span> &copy; TransViaje - Todos los derechos reservados 2024</span>
+      <a href="https://www.facebook.com/jano.gas.1/?locale=es_LA" class="RedesSociales">
+        <img src="{% static 'img/feibukk.webp' %}" width="47px" height="47px" style="margin-left: 15px;">
+      </a>
+      <a href="https://www.instagram.com/jano_gas?igsh=MWUxNHcxMTV5c2h1ZQ%3D%3D" class="RedesSociales">
+        <img src="{% static 'img/instagraaaam.png' %}" width="31px" height="31px" style="margin-left: 15px;">
+      </a>
+      <a href="index.html" class="RedesSociales">
+        <img src="{% static 'img/icono transfer.webp' %}" width="30px" height="30px" style="margin-left: 15px;">
+      </a>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
