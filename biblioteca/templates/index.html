@@ -52,6 +52,9 @@
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'quienesSomos' %}">Quienes Somos</a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'choferes' %}">Choferes</a>
+                </li>
                   <li class="nav-item">
                     <a class="nav-link" href="{% url 'trabajaConNosotros' %}">Trabaja Con Nosotros</a>
                   </li>
@@ -62,6 +65,7 @@
                   <li class="nav-item">
                     <a class="nav-link" href="{% url 'perfil' %}">Perfil: {{user.username}}</a>
                 </li>
+                
                 {% endif %}
                 </ul>
               </div>

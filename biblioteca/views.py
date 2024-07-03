@@ -41,6 +41,8 @@ def cotizarPrecio(request):
 def disponibilidad(request):
     return render(request, 'disponibilidad.html')
 
+def choferes(request):
+    return render(request, 'choferes.html')
 
 
 

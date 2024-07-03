@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
-from .views import inicio, tienda, quienesSomos, trabajaConNosotros, reservaTuGas, cotizarPrecio,disponibilidad
+from .views import inicio, tienda, quienesSomos, trabajaConNosotros, reservaTuGas, cotizarPrecio,disponibilidad,choferes
 
 
 urlpatterns = [
@@ -12,6 +12,7 @@ urlpatterns = [
     path('reservaTuGas', reservaTuGas, name='reservaTuGas'),
     path('cotizarPrecio', cotizarPrecio, name='cotizarPrecio'),
     path('disponibilidad', disponibilidad, name='disponibilidad'),
+    path('choferes', choferes, name='choferes'),
     path('perfil/', views.ver_perfil, name='perfil'),
     #PESTAÑAS
 
